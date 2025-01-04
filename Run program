@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+// Struktur untuk menyimpan data pasien
+struct Pasien {
+    string nama;
+    int usia;
+    string gejala;
+    int tingkat_urgensi; // 1 = Sangat Mendesak, 2 = Mendesak, 3 = Tidak Mendesak
+    string kategori_tindakan; // Misalnya: "Dokter Umum", "Dokter Spesialis"
+};
+
+// Fungsi untuk menilai tingkat urgensi berdasarkan gejala
+int nilaiTingkatUrgensi(const string& gejala) {
+    if (gejala == "sesak napas" || gejala == "kehilangan kesadaran" || gejala == "pendarahan berat") {
+        return 1; // Sangat Mendesak
+    } else if (gejala == "sakit dada" || gejala == "mual dan muntah" || gejala == "demam tinggi") {
+        return 2; // Mendesak
+    } else {
+        return 3; // Tidak Mendesak
+    }
+}
+
+// Fungsi untuk menentukan kategori tindakan berdasarkan gejala
+string tentukanKategoriTindakan(const string& gejala) {
+    if (gejala == "sesak napas" || gejala == "kehilangan kesadaran" || gejala == "pendarahan berat") {
+        return "Dokter Spesialis";
+    } else {
+        return "Dokter Umum";
+    }
+}
+
+// Fungsi untuk menampilkan data pasien
+void tampilkanPasien(const Pasien& pasien) {
+    cout << "Nama Pasien: " << pasien.nama << endl;
+    cout << "Usia: " << pasien.usia << endl;
+    cout << "Gejala: " << pasien.gejala << endl;
+    cout << "Tingkat Urgensi: " << (pasien.tingkat_urgensi == 1 ? "Sangat Mendesak" : pasien.tingkat_urgensi == 2 ? "Mendesak" : "Tidak Mendesak") << endl;
+    cout << "Kategori Tindakan: " << pasien.kategori_tindakan << endl;
+    cout << "----------------------------------------" << endl;
+}
+
+// Fungsi untuk membandingkan tingkat urgensi pasien
+bool urutkanPasien(const Pasien& a, const Pasien& b) {
+    return a.tingkat_urgensi < b.tingkat_urgensi; // Urutkan berdasarkan tingkat urgensi (1 paling mendesak)
+}
+
+int main() {
+    vector<Pasien> daftarPasien;
+    int jumlahPasien;
+
+    cout << "Masukkan jumlah pasien: ";
+    cin >> jumlahPasien;
+
+    for (int i = 0; i < jumlahPasien; ++i) {
+        Pasien pasien;
+        cout << "Masukkan nama pasien: ";
+        cin.ignore();  // Membersihkan buffer untuk getline
+        getline(cin, pasien.nama);
+        
+        cout << "Masukkan usia pasien: ";
+        cin >> pasien.usia;
+
+        cout << "Masukkan gejala pasien: ";
+        cin.ignore();  // Membersihkan buffer untuk getline
+        getline(cin, pasien.gejala);
+
+        pasien.tingkat_urgensi = nilaiTingkatUrgensi(pasien.gejala);
+        pasien.kategori_tindakan = tentukanKategoriTindakan(pasien.gejala);
+
+        daftarPasien.push_back(pasien);
+    }
+
+    // Mengurutkan pasien berdasarkan tingkat urgensi
+    sort(daftarPasien.begin(), daftarPasien.end(), urutkanPasien);
+
+    // Menampilkan daftar pasien berdasarkan tingkat urgensi
+    cout << "\nDaftar Pasien berdasarkan Urgensi:\n";
+    for (const auto& pasien : daftarPasien) {
+        tampilkanPasien(pasien);
+    }
+
+    return 0;
+}
