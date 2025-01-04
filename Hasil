@@ -1,0 +1,32 @@
+Masukkan jumlah pasien: 3
+Masukkan nama pasien: Ahmad
+Masukkan usia pasien: 45
+Masukkan gejala pasien: sesak napas
+
+Masukkan nama pasien: Siti
+Masukkan usia pasien: 30
+Masukkan gejala pasien: sakit dada
+
+Masukkan nama pasien: Budi
+Masukkan usia pasien: 60
+Masukkan gejala pasien: demam tinggi
+
+Daftar Pasien berdasarkan Urgensi:
+Nama Pasien: Ahmad
+Usia: 45
+Gejala: sesak napas
+Tingkat Urgensi: Sangat Mendesak
+Kategori Tindakan: Dokter Spesialis
+----------------------------------------
+Nama Pasien: Siti
+Usia: 30
+Gejala: sakit dada
+Tingkat Urgensi: Mendesak
+Kategori Tindakan: Dokter Umum
+----------------------------------------
+Nama Pasien: Budi
+Usia: 60
+Gejala: demam tinggi
+Tingkat Urgensi: Mendesak
+Kategori Tindakan: Dokter Umum
+----------------------------------------
